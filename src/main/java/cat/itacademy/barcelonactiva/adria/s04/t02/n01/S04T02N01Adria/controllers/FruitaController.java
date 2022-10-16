@@ -1,9 +1,7 @@
 package cat.itacademy.barcelonactiva.adria.s04.t02.n01.S04T02N01Adria.controllers;
 
-import cat.itacademy.barcelonactiva.adria.s04.t02.n01.S04T02N01Adria.entity.Fruita;
-import cat.itacademy.barcelonactiva.adria.s04.t02.n01.S04T02N01Adria.repository.FruitaRepository;
-import cat.itacademy.barcelonactiva.adria.s04.t02.n01.S04T02N01Adria.service.FruitaService;
-import cat.itacademy.barcelonactiva.adria.s04.t02.n01.S04T02N01Adria.service.FruitaServiceImpl;
+import cat.itacademy.barcelonactiva.adria.s04.t02.n01.S04T02N01Adria.model.domain.Fruita;
+import cat.itacademy.barcelonactiva.adria.s04.t02.n01.S04T02N01Adria.model.services.FruitaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -59,16 +57,6 @@ public class FruitaController {
         }
     }
 
-    @GetMapping("/getOne/{name}")
-    public ResponseEntity<Fruita> getFruitaById(@PathVariable("name") String name){
-        Optional<Fruita> fruitaData = fruitaService.findByName(name);
-        if (fruitaData.isPresent()){
-            return new ResponseEntity<>(fruitaData.get(), HttpStatus.OK);
-        }else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
     @PutMapping("update/{id}")
     public ResponseEntity<Fruita> updateFruita(@PathVariable("id") long id, @RequestBody Fruita fruita){
         Optional<Fruita> fruitaData = fruitaService.findById(id);
@@ -95,14 +83,3 @@ public class FruitaController {
 
 }
 
-
-/*      http://localhost:8080/fruita/add
-
-        http://localhost:8080/fruita/update
-
-        http://localhost:8080/fruita/delete/{id}
-
-        http://localhost:8080/fruita/getOne/{id}
-
-        http://localhost:8080/fruita/getAll
-*/
